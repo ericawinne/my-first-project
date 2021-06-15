@@ -27,12 +27,15 @@ body {
   ul {
     padding: 0;
   }
-  
-  nav ul {
-    margin-left: 15px;
+
+  #paintings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
-  
-  nav ul li {
+
+  nav img {
+    height: 150px;
     padding: 5px;
     cursor: pointer;
   }
@@ -69,7 +72,14 @@ body {
     cursor: pointer;
   }
   
-  .reviews li {
+  /* .reviews li {
+    background-color: #e6af0bbd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  } */
+
+  .commentsSaved li {
     background-color: #e6af0bbd;
     border-radius: 5px;
     padding: 20px;
