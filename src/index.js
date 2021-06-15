@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const objectIDs = [437984, 436532, 436535]
+  const paintingList = document.querySelector("#painting-list")
   showAllPaintings(objectIDs)
   const url = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectIDs[0]}`
   fetch(url)
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showAllPaintings (paintingIds) {
     const paintingThumbnails = document.querySelector("#paintings")
     paintingIds.forEach(id => {
+    console.log(`${id} look here`)
       const url = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
       fetch(url)
         .then(resp => resp.json())
@@ -19,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(data.primaryImageSmall)
           const img = document.createElement("img")
           img.src = data.primaryImageSmall
+          img.addEventListener("click", () => {
+              vanGoghArtDetails(data)
+          })
           paintingThumbnails.append(img)
         })
     })
@@ -31,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // display each painting and just the pic at the top of the page
 
   function vanGoghArtDetails (art) {
-    const paintingList = document.querySelector("#painting-list")
+    paintingList.innerHTML = ""
 
     const title = document.querySelector("h2")
     title.innerHTML = art.title
