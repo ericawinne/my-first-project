@@ -30,11 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(paintingIds)
   }
 
-  // want to be able to see all painting thumbnail images (grab the nav with id #paintings)
-  // make a fetch request for each object id
-
-  // display each painting and just the pic at the top of the page
-
   function vanGoghArtDetails (art) {
     paintingList.innerHTML = ""
 
