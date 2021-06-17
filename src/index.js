@@ -25,14 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
   }
+
   const commentBox = document.querySelector("textarea")
+  const commentUl = document.querySelector(".commentsSaved")
   const submitBtn = document.querySelector("#submitButton")
   submitBtn.addEventListener("click", (event) => {
     event.preventDefault()
-    // const li = document.createElement("li")
-    // li.innerHTML = commentBox.value
-    // commentUl.append(li)
-    // commentBox.value = ""
+    const li = document.createElement("li")
+    li.innerHTML = commentBox.value
+    commentUl.append(li)
     const configurationObject = {
       method: "POST",
       headers: {
@@ -46,11 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const url = "http://localhost:3000/comments/"
     fetch(url, configurationObject)
+      .then(response => response.json())
+      .then(comment => {
+        commentBox.value = ""
+      })
   })
 
   function vanGoghArtDetails (art) {
     commentBox.id = art.objectID
     paintingList.innerHTML = ""
+    console.log("vangogh art details being called")
 
     const title = document.querySelector("h2")
     title.innerHTML = art.title
@@ -69,11 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const artCreditLineLi = document.createElement("li")
     artCreditLineLi.innerHTML = art.creditLine
     paintingList.append(artCreditLineLi)
-    const commentUl = document.querySelector(".commentsSaved")
+    commentUl.innerHTML = ""
     fetch("http://localhost:3000/comments")
       .then(resp => resp.json())
       .then(data => {
-        const paintingComments = data.filter(element => element.artId === art.objectID)
+        const paintingComments = data.filter(element => parseInt(element.artId) === art.objectID)
+        paintingComments.forEach(comment => {
+          const li = document.createElement("li")
+          li.innerHTML = comment.content
+          commentUl.append(li)
+        })
         console.log(paintingComments)
         console.log(art.objectID)
       })

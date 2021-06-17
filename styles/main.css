@@ -36,7 +36,8 @@ h1 {
 nav img {
   height: 220px;
   padding: 50px;
-  cursor:zoom-in
+  cursor:zoom-in;
+  border: 1px solid #FFF;
 } 
 
 main {
